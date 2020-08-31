@@ -15,8 +15,7 @@
 		try {
 			$apiContainer = initializeApiContainer();
 		} catch(\InvalidArgumentException | \TypeError $e) {
-			echo json_encode(['error'=>$e->getMessage()]);
-			exit;
+			return json_encode(['error'=>$e->getMessage()]);
 		}
 	
 	    $mapCoordinatesFinder = new MapCoordinatesFinder($apiContainer);
