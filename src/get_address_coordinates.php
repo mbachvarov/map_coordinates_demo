@@ -12,8 +12,13 @@
 	}	
 
 	function findCoordinatesOf($address) {	
-		$apiContainer = initializeApiContainer();
-
+		try {
+			$apiContainer = initializeApiContainer();
+		} catch(\InvalidArgumentException | \TypeError $e) {
+			echo json_encode(['error'=>$e->getMessage()]);
+			exit;
+		}
+	
 	    $mapCoordinatesFinder = new MapCoordinatesFinder($apiContainer);
 	    $mapCoordinatesFinder->findCoordinatesOf($address);
 
@@ -24,19 +29,9 @@
 		$apiContainer = new MapCoordinatesAPIContainer;
 	    $defaultAPIsConfigs =  include(__DIR__.'/../config/map_coordinates_api/config.php');
 	    foreach ($defaultAPIsConfigs as $apiConfig) {
-	    	try {
-				$api = new BaseMapCoordinatesAPI(include($apiConfig['config_dir']));
-				$api->setParser($apiConfig['parser']);
-			    $apiContainer->add($api);
-			} catch(\InvalidArgumentException $e) {
-				$configDir = $apiConfig['config_dir'];
-				echo json_encode(['error'=>"Map Coordinates API invalid config: $configDir"]);
-				exit;
-			} catch(\TypeError $e) {
-				$configDir = $apiConfig['config_dir'];
-				echo json_encode(['error'=>"Map Coordinates API config not found: $configDir"]);
-				exit;	
-			}
+			$api = new BaseMapCoordinatesAPI(include($apiConfig['config_dir']));
+			$api->setParser($apiConfig['parser']);
+		    $apiContainer->add($api);
 	    }
 
 	    return $apiContainer;

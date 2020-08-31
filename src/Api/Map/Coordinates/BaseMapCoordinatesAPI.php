@@ -75,7 +75,7 @@ class BaseMapCoordinatesAPI implements MapCoordinatesAPI {
             || !array_key_exists('params', $config)){
             
             throw new \InvalidArgumentException(
-                sprintf('Given config is invalid. Unable to create BaseMapCoordinatesAPI instance.')
+                sprintf('Invalid config. Unable to create BaseMapCoordinatesAPI instance.')
             );
         }
     }
