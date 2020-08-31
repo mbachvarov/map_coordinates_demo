@@ -69,7 +69,7 @@ class BaseMapCoordinatesAPI implements MapCoordinatesAPI {
      * @throws InvalidArgumentException
      * @return void
      */
-    private function ensureIsValidConfig($config): void {
+    private function ensureIsValidConfig(array $config): void {
         if(!array_key_exists('name', $config) 
             || !array_key_exists('coordinates_get_url', $config) 
             || !array_key_exists('params', $config)){
@@ -85,7 +85,7 @@ class BaseMapCoordinatesAPI implements MapCoordinatesAPI {
      *
      * @return array
      */
-    public function makeGetRequest($url): ?array {
+    public function makeGetRequest(string $url): ?array {
         return ApiRequester::get($url, $this->requestOpts);
     }
 
@@ -96,7 +96,7 @@ class BaseMapCoordinatesAPI implements MapCoordinatesAPI {
      *
      * @return array
      */
-    private function getRequestParamsWithAddress($address): array {
+    private function getRequestParamsWithAddress(string $address): array {
         $params = [];
         foreach ($this->params as $key => $value) {
             $params[$key] = str_replace(BaseMapCoordinatesAPI::$ADDRESS_PARAM_VALUE_PLACEHOLDER, $address, $value);
@@ -128,7 +128,7 @@ class BaseMapCoordinatesAPI implements MapCoordinatesAPI {
      * {@inherit}
      * {@inheritdoc}
      */
-    public function generateGetCoordinatesRequestUrl($address): string {
+    public function generateGetCoordinatesRequestUrl(string $address): string {
         $params = $this->getRequestParamsWithAddress($address);
         $url = $this->coordinatesGetUrl.(count($params)>0 ? "?":"").http_build_query($params);
         
@@ -140,7 +140,7 @@ class BaseMapCoordinatesAPI implements MapCoordinatesAPI {
      * {@inherit}
      * {@inheritdoc}
      */
-    public function coordinatesGetRequest($address): ?MapCoordinates {
+    public function coordinatesGetRequest(string $address): ?MapCoordinates {
         if(!isset($this->parser)){
             return null;
         }

@@ -20,7 +20,7 @@ interface MapCoordinatesAPI {
      * @param string $address The address which coordinates we are looking for.
      * @return string
      */
-    function generateGetCoordinatesRequestUrl($address): string;
+    function generateGetCoordinatesRequestUrl(string $address): string;
 
     /**
      * Makes API request to get coordinates of the given address.
@@ -30,7 +30,7 @@ interface MapCoordinatesAPI {
      * @param string $address The address which coordinates we need to find.
      * @return MapCoordinates
      */
-    function coordinatesGetRequest($address) : ?MapCoordinates;
+    function coordinatesGetRequest(string $address) : ?MapCoordinates;
 
     /**
      * Sets the parser
