@@ -24,4 +24,4 @@ Go into application's main folder where the vendor folder is situated and run `.
 
 ## Updating backend
 
-Go into application's main folder where the vendor folder is situated and run `php composer.phar install` and then 'php composer.phar dumpautoload -0'
+Go into application's main folder where the vendor folder is situated and run `php composer.phar install` and then `php composer.phar dumpautoload -0`
