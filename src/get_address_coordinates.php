@@ -6,22 +6,22 @@
 	use Api\Map\Coordinates\BaseMapCoordinatesAPI;
 	
 	if(isset($_GET['address'])) {
-		echo findCoordinatesOf($_GET['address']);
+		try {
+			echo json_encode(findCoordinatesOf($_GET['address']));
+		} catch(\InvalidArgumentException | \TypeError $e) {
+			return json_encode(['error' => $e->getMessage()]);
+		}
 	} else {
 		echo json_encode(['error'=>'Missing address param']);
 	}	
 
 	function findCoordinatesOf($address) {	
-		try {
-			$apiContainer = initializeApiContainer();
-		} catch(\InvalidArgumentException | \TypeError $e) {
-			return json_encode(['error'=>$e->getMessage()]);
-		}
-	
+		$apiContainer = initializeApiContainer();
+
 	    $mapCoordinatesFinder = new MapCoordinatesFinder($apiContainer);
 	    $mapCoordinatesFinder->findCoordinatesOf($address);
 
-	    return json_encode($mapCoordinatesFinder->getResults());    	
+	    return $mapCoordinatesFinder->getResults();    	
 	}
 
 	function initializeAPIContainer() {

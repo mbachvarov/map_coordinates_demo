@@ -26,7 +26,7 @@ class MapCoordinatesFinder {
      */
 	function __construct(MapCoordinatesAPIContainer $mapCoordinatesAPIContainer) {
 		$this->mapCoordinatesAPIContainer = $mapCoordinatesAPIContainer;
-		$this->results = array();
+		// $this->results = array();
 	}
 
 	/**
@@ -41,9 +41,7 @@ class MapCoordinatesFinder {
 		$this->results = array();
 		foreach($this->mapCoordinatesAPIContainer->getAPIs() as $mapCoordinatesAPI) {
 			$result = $mapCoordinatesAPI->coordinatesGetRequest($address);
-			if(!is_null($result)) {
 				$this->results[$mapCoordinatesAPI->getName()] = $result;
-			}
 		}
 	}
 
