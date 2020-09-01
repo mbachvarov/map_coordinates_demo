@@ -9,7 +9,7 @@
 		try {
 			echo json_encode(findCoordinatesOf($_GET['address']));
 		} catch(\InvalidArgumentException | \TypeError $e) {
-			return json_encode(['error' => $e->getMessage()]);
+			echo json_encode(['error' => $e->getMessage()]);
 		}
 	} else {
 		echo json_encode(['error'=>'Missing address param']);
