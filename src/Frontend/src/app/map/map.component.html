@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6" #googleMap id="googleMap"></div>
+    <div
+      class="col-sm-6"
+      #openStreetMap
+      id="openStreetMap"
+      style="height: 500px; width: 100%"
+      leaflet
+    ></div>
+  </div>
+  <div class="row" id="forms">
+    <div class="form-group">
+      <input
+        class="mr-2"
+        id="place"
+        type="text"
+        autocomplete="on"
+      />
+      <button
+        class="btn btn-primary mr-2"
+        type="button"
+        (click)="getLocation()"
+      >
+        SEARCH
+      </button>
+    </div>
+  </div>
+</div>
+<div class="container text-center">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <h6>Google Map Coordinates</h6>
+        <label class="mr-2">Lat</label>
+        <input class="mr-2" readonly [value]="gLat" />
+        <label class="mr-2">Lng</label>
+        <input readonly [value]="gLng" />
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <h6>Open Street Map Coordinates</h6>
+        <label class="mr-2">Lat</label>
+        <input class="mr-2" readonly [value]="oLat" />
+        <label class="mr-2">Lng</label>
+        <input readonly [value]="oLng" />
+      </div>
+    </div>
+  </div>
+  <div class="row h-100" *ngIf="error">
+    <div class="col-sm-12 my-auto alert alert-danger">
+      {{error}}
+    </div>
+ </div>
+</div>

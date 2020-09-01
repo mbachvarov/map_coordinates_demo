@@ -12,5 +12,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9"
+    },
+    "require": {
+        "cretueusebiu/valet-windows": "^2.1"
     }
 }
