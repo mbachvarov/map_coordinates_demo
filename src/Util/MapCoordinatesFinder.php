@@ -39,8 +39,10 @@ class MapCoordinatesFinder {
      */
 	function findCoordinatesOf(string $address): void {
 		$this->results = array();
+		$this->results['apis'] = array();
 		foreach($this->mapCoordinatesAPIContainer->getAPIs() as $mapCoordinatesAPI) {
 			$result = $mapCoordinatesAPI->coordinatesGetRequest($address);
+				array_push($this->results['apis'], $mapCoordinatesAPI->getName());
 				$this->results[$mapCoordinatesAPI->getName()] = $result;
 		}
 	}
